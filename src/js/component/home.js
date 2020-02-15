@@ -22,21 +22,46 @@ import { Card } from "./card";
 // 	);
 // }
 
+// export function Home() {
+// 	const [people, setPeople] = useState([
+// 		"Angel",
+// 		"Brenda",
+// 		"Joivre",
+// 		"Nick",
+// 		"Hernan",
+// 		"Ben"
+// 	]);
+
+// 	return (
+// 		<>
+// 			{people.map((item, index) => {
+// 				return <Card key={index} cardTitle={item} />;
+// 			})}
+// 			;
+// 		</>
+// 	);
+// }
+
 export function Home() {
-	const [people, setPeople] = useState([
-		"Angel",
-		"Brenda",
-		"Joivre",
-		"Nick",
-		"Hernan",
-		"Ben"
-	]);
+	const [people, setPeople] = useState([]);
+
+	useEffect(() => {
+		fetch("https://swapi.co/api/people/", {
+			method: "GET"
+		})
+			.then(resp => resp.json())
+			.then(data => {
+				setPeople(data);
+				console.log(resp);
+			});
+	}, []);
 
 	return (
 		<>
 			{people.map((item, index) => {
-				return <div key={index}>{item}</div>;
+				return <Card key={index} cardTitle={item} />;
 			})}
+			;
 		</>
 	);
 }
