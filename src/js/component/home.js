@@ -51,17 +51,19 @@ export function Home() {
 		})
 			.then(resp => resp.json())
 			.then(data => {
-				setPeople(data);
-				console.log(resp);
+				people.map((item, index) => {
+					return <Card key={index} cardTitle={item} />;
+				});
+				console.log(data);
 			});
 	}, []);
 
-	return (
-		<>
-			{people.map((item, index) => {
-				return <Card key={index} cardTitle={item} />;
-			})}
-			;
-		</>
-	);
+	// return (
+	// 	<>
+	// 		{people.map((item, index) => {
+	// 			return <Card key={index} cardTitle={item} />;
+	// 		})}
+	// 		;
+	// 	</>
+	// );
 }
